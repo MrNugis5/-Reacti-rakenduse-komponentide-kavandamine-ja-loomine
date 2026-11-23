@@ -1,27 +1,35 @@
-import './App.css';
+import Header from "./components/Header";
+import PageHeading from "./components/PageHeading";
+import CategoryFilter from "./components/CategoryFilter";
+import CourseList from "./components/CourseList";
+import Footer from "./components/Footer";
+import { courses, categories } from "./data/coursesData";
+import "./App.css";
 
 function App() {
+  const popularCourses = courses.filter(course => course.popular);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+    <div className="app-container">
+      <Header />
+      
+      <main className="main-content">
+        <PageHeading 
+          title="Populaarsed koolitused" 
+        />
+        <CourseList courses={popularCourses} />
+
+        <div className="divider"></div>
+
+        <PageHeading 
+          title="Koolitused" 
+          description="Leia endale sobiv koolitus ja arenda oma teadmisi." 
+        />
+        <CategoryFilter categories={categories} />
+        <CourseList courses={courses} />
+      </main>
+
+      <Footer />
     </div>
   );
 }
